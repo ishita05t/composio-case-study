@@ -1,0 +1,114 @@
+{
+  "run_at": "2026-07-11T06:58:07.792178+00:00",
+  "records": 100,
+  "required_field_failures": [],
+  "by_category": {
+    "CRM & Sales": 10,
+    "Support & Helpdesk": 10,
+    "Communications": 10,
+    "Marketing, Ads & Social": 10,
+    "Ecommerce": 10,
+    "Data, SEO & Scraping": 10,
+    "Developer, Infra & Data": 10,
+    "Productivity & PM": 10,
+    "Finance & Fintech": 10,
+    "AI, Research & Media": 10
+  },
+  "by_auth": {
+    "Token or API key": 50,
+    "OAuth 2.0": 28,
+    "API key / token": 22
+  },
+  "by_readiness": {
+    "Validate": 20,
+    "Build now": 61,
+    "Not now": 6,
+    "Outreach": 13
+  },
+  "verification_queue": [
+    {
+      "name": "Fathom",
+      "category": "AI, Research & Media",
+      "auth": "Token or API key",
+      "access": "Self-serve",
+      "source": "https://fathom.video"
+    },
+    {
+      "name": "Grain",
+      "category": "AI, Research & Media",
+      "auth": "Token or API key",
+      "access": "Admin",
+      "source": "https://grain.com"
+    },
+    {
+      "name": "NotebookLM",
+      "category": "AI, Research & Media",
+      "auth": "Token or API key",
+      "access": "Gated",
+      "source": "https://cloud.google.com/gemini"
+    },
+    {
+      "name": "Otter AI",
+      "category": "AI, Research & Media",
+      "auth": "OAuth 2.0",
+      "access": "Admin",
+      "source": "https://help.otter.ai"
+    },
+    {
+      "name": "HubSpot",
+      "category": "CRM & Sales",
+      "auth": "Token or API key",
+      "access": "Self-serve",
+      "source": "https://hubspot.com"
+    },
+    {
+      "name": "Twenty",
+      "category": "CRM & Sales",
+      "auth": "Token or API key",
+      "access": "Self-serve",
+      "source": "https://twenty.com"
+    },
+    {
+      "name": "DealCloud",
+      "category": "CRM & Sales",
+      "auth": "Token or API key",
+      "access": "Gated",
+      "source": "https://api.docs.dealcloud.com"
+    },
+    {
+      "name": "Salesforce",
+      "category": "CRM & Sales",
+      "auth": "Token or API key",
+      "access": "Admin",
+      "source": "https://salesforce.com"
+    },
+    {
+      "name": "Slack",
+      "category": "Communications",
+      "auth": "OAuth 2.0",
+      "access": "Self-serve",
+      "source": "https://slack.com"
+    },
+    {
+      "name": "Pumble",
+      "category": "Communications",
+      "auth": "Token or API key",
+      "access": "Self-serve",
+      "source": "https://pumble.com"
+    },
+    {
+      "name": "Zoho Cliq",
+      "category": "Communications",
+      "auth": "Token or API key",
+      "access": "Admin",
+      "source": "https://zoho.com/cliq"
+    },
+    {
+      "name": "DataForSEO",
+      "category": "Data, SEO & Scraping",
+      "auth": "API key / token",
+      "access": "Self-serve",
+      "source": "https://docs.dataforseo.com"
+    }
+  ]
+}

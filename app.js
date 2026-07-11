@@ -1,0 +1,33 @@
+const count = fn => apps.filter(fn).length;
+const pct = n => `${Math.round((n / apps.length) * 100)}%`;
+const build = count(app => app.verdict === 'Build now');
+const validate = count(app => app.verdict === 'Validate');
+const outreach = count(app => app.verdict === 'Outreach');
+const oauthCount = count(app => app.auth.includes('OAuth'));
+document.querySelector('#statGrid').innerHTML = [[build,'Build now','public docs + self-serve path'],[validate,'Validate','tenant, policy, or surface ambiguity'],[outreach,'Outreach','commercial or partner motion']].map(([number,label,detail]) => `<div><strong>${number}</strong><span>${label}</span><p>${detail}</p></div>`).join('');
+document.querySelector('#oauthPct').textContent = pct(oauthCount);
+document.querySelector('#selfPct').textContent = pct(build);
+document.querySelector('#blocker').textContent = validate + outreach;
+const categories = Object.entries(apps.reduce((totals, app) => { totals[app.category] = (totals[app.category] || 0) + 1; return totals; }, {}));
+document.querySelector('#categoryBars').innerHTML = categories.map(([name,total]) => `<div class="bar"><span>${name}</span><div class="rail"><div class="fill" style="width:${total * 10}%"></div></div><small>${total}</small></div>`).join('');
+const rows = document.querySelector('#rows');
+const shown = document.querySelector('#shown');
+const searchInput = document.querySelector('#search');
+const accessSelect = document.querySelector('#access');
+const verdictSelect = document.querySelector('#verdict');
+const searchButton = document.querySelector('#runSearch');
+const clearButton = document.querySelector('#clearFilters');
+const normalize = value => value.toLowerCase().replace(/\band\b/g, '&').replace(/[^a-z0-9&]/g, '');
+function renderMatrix() {
+  const query = normalize(searchInput.value), access = accessSelect.value, verdict = verdictSelect.value;
+  const filtered = apps.filter(app => (!query || normalize(`${app.name} ${app.category}`).includes(query)) && (!access || app.access === access) && (!verdict || app.verdict === verdict));
+  shown.textContent = `${filtered.length} of ${apps.length} records`;
+  rows.innerHTML = filtered.length ? filtered.map(app => `<tr><td>${String(app.id).padStart(2,'0')}</td><td><b>${app.name}</b><span>${app.category}</span></td><td>${app.auth}</td><td><i class="pill ${app.access === 'Self-serve' ? 'self' : app.access === 'Admin' ? 'admin' : 'gated'}">${app.access}</i></td><td>${app.surface}</td><td><i class="pill ${app.verdict === 'Build now' ? 'build' : app.verdict === 'Validate' ? 'validate' : 'outreach'}">${app.verdict}</i></td><td><a class="evidence" href="${app.source}" target="_blank" rel="noreferrer">Source ↗</a></td></tr>`).join('') : '<tr><td colspan="7" class="empty">No records match these filters. Try clearing them.</td></tr>';
+}
+searchInput.addEventListener('input', renderMatrix);
+searchInput.addEventListener('keydown', event => { if (event.key === 'Enter') renderMatrix(); });
+accessSelect.addEventListener('change', renderMatrix);
+verdictSelect.addEventListener('change', renderMatrix);
+searchButton.addEventListener('click', renderMatrix);
+clearButton.addEventListener('click', () => { searchInput.value = ''; accessSelect.value = ''; verdictSelect.value = ''; renderMatrix(); });
+renderMatrix();
